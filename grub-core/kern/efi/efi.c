@@ -302,7 +302,8 @@ grub_addr_t
 grub_efi_modules_addr (void)
 {
   grub_efi_loaded_image_t *image;
-  struct grub_pe32_header *header;
+  struct grub_msdos_image_header *dos_header;
+  struct grub_coff_image_header *header;
   struct grub_pe32_coff_header *coff_header;
   struct grub_pe32_section_table *sections;
   struct grub_pe32_section_table *section;
@@ -313,7 +314,10 @@ grub_efi_modules_addr (void)
   if (! image)
     return 0;
 
-  header = image->image_base;
+  dos_header = (struct grub_msdos_image_header *)image->image_base;
+
+  header = (struct grub_coff_image_header *) ((char *) dos_header
+                                              + dos_header->pe_signature_offset);
   coff_header = &(header->coff_header);
   sections
     = (struct grub_pe32_section_table *) ((char *) coff_header
