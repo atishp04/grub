@@ -21,6 +21,8 @@
 
 #include <grub/types.h>
 
+#include <grub/efi/pe32.h>
+
 #define GRUB_LINUX_ARM64_MAGIC_SIGNATURE 0x644d5241 /* 'ARM\x64' */
 
 /* From linux/Documentation/arm64/booting.txt */
@@ -36,6 +38,8 @@ struct linux_arm64_kernel_header
   grub_uint64_t res4;		/* reserved */
   grub_uint32_t magic;		/* Magic number, little endian, "ARM\x64" */
   grub_uint32_t hdr_offset;	/* Offset of PE/COFF header */
+
+  struct grub_coff_image_header coff_image_header;
 };
 
 #if defined(__aarch64__)
