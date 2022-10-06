@@ -1,0 +1,40 @@
+This series unifies the linux loader for ARM64 & RISC-V. The linux loader
+for ARM64 is pretty much arch independent. Thus, this series just moves
+it to the common directory and update the make files.
+
+This series is rebased on top of Ard's LoadFile2 series[1].
+
+The unification effort was a little mess and I was to blame :(.
+I started the effort but couldn't follow up after. Nikita picked it up
+and rebased all the patches along with LoadFile2.
+
+However, Nikita did not follow up after v3 as well. Ard revised his
+LoadFile2 series few weeks back. As the ocotober deadline for next grub
+release is closing, I decided to rebase the patches so that RISC-V support
+can be officially part of the release. Sorry for the mess/confusion.
+
+This series has been tested with OpenSuse image in Qemu. It would be good
+to get more testing on ARM64 and real RISC-V boards as well.
+
+Changes from v4->v5:
+1. Removed redundant macros from header file and updated the rv32
+   kernel header structure.
+
+Changes from v3->V4:
+1. Added all the comments on v3.
+2. Dropped LoadFile2 patches as Ard's series[1] updated those patches
+
+[1] https://lists.gnu.org/archive/html/grub-devel/2022-09/msg00057.html
+
+Cc: Ard Biesheuvel <ardb@kernel.org>
+Cc: Daniel Kiper <daniel.kiper@oracle.com>
+Cc: Leif Lindholm <quic_llindhol@quicinc.com>
+Cc: Nikita Ermakov <arei@altlinux.org>
+Cc: Huacai Chen <chenhuacai@loongson.cn>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: dann frazier <dann.frazier@canonical.com>
+Cc: Julian Andres Klode <julian.klode@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+option-subject Unify ARM64 & RISC-V Linux Loader
+option-prefix v5 PATCH
