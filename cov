@@ -1,0 +1,50 @@
+This series unifies the linux loader for ARM64 & RISC-V. The linux loader
+for ARM64 is pretty much arch independent. Thus, this series just moves
+it to the common directory and update the make files.
+
+This series also removes the arch specific kernel image haders for
+ARM64, RISC-V, ARM as suggested on v6[1].I have verified with coreboot,
+efi platform options for ARM. I am not that well versed with ARM options.
+If it causes any more build failure, please scream at me again :).
+
+This series has been tested with OpenSuse image in Qemu for RISC-V1.
+For ARM64,ARM it has been compile tested only.
+It would be good to get more testing on ARM64 and real RISC-V boards as well.
+
+[1] https://lists.gnu.org/archive/html/grub-devel/2022-11/msg00042.html
+
+Sorry for the delay in sending the series. Hopefully, it has not delayed the
+grub release plan.
+
+Changes from v7->v8:
+1. Removed the arch specific header for ARM as well.
+2. Fixed ARM64 load image header with random COFF header placement.
+
+Changes from v6->v7:
+1. Rebased on top of the latest upstream.
+2. Addressed all the comments on v6.
+3. Removed arch specific image header files for ARM64 & RISC-V.
+
+Changes from v5->v6:
+1. Rebased on top of Ard's latest LoadFile2 series.
+
+Changes from v4->v5:
+1. Removed redundant macros from header file and updated the rv32
+   kernel header structure.
+
+Changes from v3->V4:
+1. Added all the comments on v3.
+2. Dropped LoadFile2 patches as Ard's series[1] updated those patches
+
+Cc: Ard Biesheuvel <ardb@kernel.org>
+Cc: Daniel Kiper <daniel.kiper@oracle.com>
+Cc: Leif Lindholm <quic_llindhol@quicinc.com>
+Cc: Nikita Ermakov <arei@altlinux.org>
+Cc: Huacai Chen <chenhuacai@loongson.cn>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: dann frazier <dann.frazier@canonical.com>
+Cc: Julian Andres Klode <julian.klode@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+option-subject Unify ARM64 & RISC-V Linux Loader
+option-prefix v8 PATCH
